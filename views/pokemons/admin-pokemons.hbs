@@ -1,0 +1,134 @@
+<main>
+
+  {{!-- <div class="card position-absolute top-50 end-50 mt-5 translate-middle md-auto bg-dark" style="width: 20rem;"
+    role="alert" data-autohide="false" aria-live="assertive" aria-atomic="true">
+    <div class="toast-body ">
+      <p class="text-white">Seguro que quieres eliminar este pokemon?</p>
+      <div class="mt-2 pt-2 border-top">
+        <button type="button" class="btn btn-danger btn-sm float-end">Eliminar</button>
+        <button type="button" class="btn btn-info btn-sm float-end me-2" data-bs-dismiss="toast">Cancelar</button>
+      </div>
+    </div>
+  </div> --}}
+
+  {{#if admin}}
+
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Administrador de Pokemones</h1>
+        <p class="lead text-muted">Si no encuentras tu pokemon favorito crea uno con las
+          caracteristicas que quieras, deja que fluya tu imaginación.</p>
+        <p>
+          <a href="/create-pokemon" class="btn btn-primary my-2">Crea un nuevo pokemon</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+  {{#if hasPokemons}}
+
+
+  <div class="row">
+    {{#each pokemons}}
+
+    <div class="col mb-4" id="container-pokemon">
+      <div class="card border border-1 border-dark bg-light" style="width: 25rem; height: 31rem;">
+        <img src="{{this.imageUrl}}" class="card-img-top ms-5" style="width: 18rem; height: 20rem" alt="pokemon" />
+        <div class="card-body">
+          <h4 class="card-title text-center">{{this.name}} </h4>
+          <p class="card-text">
+            <strong>Region:</strong> {{this.region.dataValues.name}}
+          </p>
+          <p>
+            <strong>Tipo:</strong> {{this.type.dataValues.name}}
+          </p>
+          <a href="/edit-pokemon/{{this.id}}?edit=true" class="btn btn-secondary float-end">Actualizar</a>
+          <form class="form-delete" action="/delete-pokemon" method="post">
+            <input type="hidden" name="PokemonId" value="{{this.id}}" />
+            <button type="submit" class="btn btn-danger float-end me-2 btn-delete">Eliminar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+
+    {{/each}}
+  </div>
+  {{else}}
+  <h1 class="text-center fw-light mb-3 mt-3">Lo sentimos :(</h1>
+  <h5 class="text-center lead text-muted">No se ha encontrado ningún pokemon.
+    {{/if}}
+
+    {{else}}
+
+    {{#if regions}}
+    <form method="POST" action="/filter-pokemons">
+      <div class="card mt-2 position-absolute end-0" style="width: 20rem;">
+        <select class="form-select" name="Filter" onchange="this.form.submit()">
+          {{#if filter}}
+          <option value="" selected disabled>{{regionSelected}}</option>
+          {{#each regions as |region|}}
+          <option value="{{region.regionId}}">{{region.name}}</option>
+          {{/each}}
+          {{else}}
+          <option value="" selected disabled>Filtrar por región</option>
+          {{#each regions as |region|}}
+          <option value="{{region.regionId}}">{{region.name}}</option>
+          {{/each}}
+          {{/if}}
+        </select>
+      </div>
+    </form>
+    {{/if}}
+
+    <section class="py-5 text-center container">
+      <div class="row py-lg-5">
+        <div class="col-lg-6 col-md-8 mx-auto">
+          <h1 class="fw-light">Pokedex App</h1>
+          <p class="lead text-muted">Encuentra tu pokemon favorito entre toda la variedad
+            de pokemones de diferentes tipos y regiones mostrados a continuación.</p>
+          <p>
+            Filtra tus pokemones por la región que quieras.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    {{#if hasPokemons}}
+
+
+    <div class="row">
+      {{#each pokemons}}
+
+      <div class="col mb-4">
+        <div class="card border border-1 border-dark bg-light" style="width: 25rem; height: 30rem">
+          <img src="{{this.imageUrl}}" class="card-img-top ms-5" style="width: 18rem; height: 20rem" alt="pokemon" />
+          <div class="card-body">
+            <h4 class="card-title text-center">{{this.name}} </h4>
+            <p class="card-text">
+              <strong>Region:</strong> {{this.region.dataValues.name}}
+            </p>
+            <p>
+              <strong>Tipo:</strong> {{this.type.dataValues.name}}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <script src="/assets/js/toast/toastr.min.js"></script>
+      <script src="/assets/js/jQuery/jquery-3.6.0.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+      {{/each}}
+      {{else}}
+
+      <h1 class="text-center fw-light mb-3 mt-3">Lo sentimos :(</h1>
+      <h5 class="text-center lead text-muted">No se ha encontrado ningún pokemon.
+        {{/if}}
+
+        {{/if}}
+
+
+
+</main>

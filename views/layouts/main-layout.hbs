@@ -1,0 +1,78 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/assets/css/bootstrap/bootstrap.min.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <link rel="stylesheet" href="/assets/css/toast/toastr.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+  <title>{{pageTitle}}</title>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link {{#if homeActive}}active{{/if}}" aria-current="page" href="/">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{#if pokemonActive}}active{{/if}}" aria-current="page"
+              href="/admin-pokemons">Pokemones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{#if regionsActive}}active{{/if}}" aria-current="page"
+              href="/admin-regions">Regiones</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link {{#if typesActive}}active{{/if}}" aria-current="page" href="/admin-types">Tipos de
+              pokemones</a>
+          </li>
+        </ul>
+        {{#if search}}
+        <form action="/search" class="d-flex" role="search" method="post">
+          <input class="form-control me-2" type="search" name="SearchVar"
+            placeholder="{{#if searching}} {{pokemonName}} {{else}}Busca un pokemon...{{/if}}" aria-label="Search">
+          <button class="btn btn-dark border-white" type="submit">Burscar</button>
+        </form>
+        {{/if}}
+      </div>
+    </div>
+  </nav>
+  <div class="container" id="main-container">
+
+    {{{body}}}
+
+
+
+
+  </div>
+
+  <div class="toast-container d-flex position-fixed bottom-0 end-0 p-3">
+    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header bg-white">
+        <img src="https://cdn-icons-png.flaticon.com/16/845/845646.png" class="rounded me-2" alt="img">
+        <strong class="me-auto">Notificación</strong>
+        <small>Hace 1 segundo</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+      </div>
+      <div class="toast-body bg-white">
+        Se ha eliminado satisfcatoriamente.
+      </div>
+    </div>
+  </div>
+
+  <script src="/assets/js/bootstrap/bootstrap.js"></script>
+
+  <script src="/assets/js/toast/toastr.min.js"></script>
+  <script src="/assets/js/jQuery/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="/assets/js/index/index.js"></script>
+
+</body>
+
+
+</html>

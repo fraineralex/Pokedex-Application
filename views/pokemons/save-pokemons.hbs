@@ -1,0 +1,89 @@
+<main class="mt-5">
+  {{#if hasRegions}}
+  {{#if hasType}}
+  <form class="row g-3 needs-validation" method="POST"
+    action="{{#if editMode}}/edit-pokemon{{else}}/create-pokemon{{/if}}">
+    <div class="col-8 m-md-auto">
+      <div class="card mb-5">
+        <div class="card-header bg-secondary text-light">
+          <h4 class="text-center">{{#if editMode}}Actualizar{{else}}Registrar{{/if}} pokemon</h4>
+        </div>
+        <div class="card-body">
+          <div class="card-title">
+            <h4 class="text-center mb-4">Rellene todos los campos a continuación</h4>
+          </div>
+
+          <div class="mb-3">
+            <label for="validationServer03" class="form-label"><strong>Nombre</strong></label>
+            <input type="text" class="form-control" id="validationServer03" name="Name"
+              value="{{#if editMode}}{{pokemon.name}}{{/if}}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="image" class="form-label"><strong>Imagen URL</strong></label>
+            <input type="text" class="form-control" id="image" name="ImageUrl"
+              value="{{#if editMode}}{{pokemon.imageUrl}}{{/if}}" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="validationCustom04" class="form-label"><strong>Región perteneciente</strong></label>
+            <select class="form-select" id="validationCustom04" name="RegionId" required>
+              <option selected disabled value="">Selecciona una región</option>
+
+              {{#each regions as |region|}}
+              {{#if (equalValue region.regionId ../pokemon.regionRegionId )}}
+              <option selected value="{{region.regionId}}">{{region.name}}</option>
+              {{else}}
+              <option value="{{region.regionId}}">{{region.name}}</option>
+              {{/if}}
+              {{/each}}
+            </select>
+            <div class="invalid-feedback">
+              Please select a valid state.
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="region" class="form-label"><strong>Tipo primario</strong></label>
+            <select class="form-select" id="region" name="TypeId" required>
+              <option selected disabled value="">Selecciona un tipo</option>
+
+              {{#each types as |type|}}
+              {{#if (equalValue type.typeId ../pokemon.typeTypeId )}}
+              <option selected value="{{type.typeId}}">{{type.name}}</option>
+              {{else}}
+              <option value="{{type.typeId}}">{{type.name}}</option>
+              {{/if}}
+              {{/each}}
+
+            </select>
+          </div>
+
+
+          {{#if editMode}}
+
+          <input type="hidden" name="pokemonId" value="{{pokemon.id}}">
+
+          {{/if}}
+
+          <a href="/admin-pokemons" class="btn btn-secondary float-end mt-2">Volver</a>
+
+          <button type="submit" class="btn btn-secondary float-end mt-2 me-2">{{#if
+            editMode}}Actualizar{{else}}Registrar{{/if}}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+  </div>
+  </div>
+  {{else}}
+  <h1 class="text-center fw-light mb-3">Lo sentimos :(</h1>
+  <h5 class="text-center lead text-muted">No hay tipos de pokemones registrados, debe crear al menos un tipo de pokemon
+    para poder crear un pokemon.</h5>
+  {{/if}}
+  {{else}}
+  <h1 class="text-center fw-light mb-3">Lo sentimos :(</h1>
+  <h5 class="text-center lead text-muted">No hay regiones registradas, debe crear al menos una región para poder crear
+    un pokemon.</h5>
+  {{/if}}
+</main>

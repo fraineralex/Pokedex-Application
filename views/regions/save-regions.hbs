@@ -1,0 +1,39 @@
+<main class="mt-5">
+    <form class="row g-3 needs-validation" method="POST" action="{{#if editMode}}/edit-region{{else}}/create-region{{/if}}">
+        <div class="col-8 m-md-auto">
+            <div class="card mb-5">
+                <div class="card-header bg-secondary text-light">
+                    <h4 class="text-center">{{#if editMode}}Actualizar{{else}}Registrar una nueva{{/if}} región</h4>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">
+                    <h4 class="text-center mb-4">Rellene todos los campos a continuación</h4>
+                    </div>
+
+                      <div class="mb-3">
+                        <label for="name" class="form-label"><strong>Nombre</strong></label>
+                        <input type="text" class="form-control" id="name" name="Name" value="{{#if editMode}}{{region.name}}{{/if}}" required/>
+                      </div>
+
+                      <div class="mb-3">
+                        <label for="description" class="form-label"><strong>Descripción</strong></label>
+                        <textarea class="form-control" rows="4" id="description" name="Description">{{#if editMode}}{{region.description}}{{/if}}</textarea>
+                      </div>
+                      
+                      
+                      {{#if editMode}}
+
+                        <input type="hidden" name="RegionId" value="{{region.regionId}}">
+
+                      {{/if}}
+
+                        <a href="/admin-regions" class="btn btn-secondary float-end mt-2">Volver</a>
+                      
+                        <button type="submit" class="btn btn-secondary float-end mt-2 me-2">{{#if editMode}}Actualizar{{else}}Registrar{{/if}}</button>
+                </div>
+            </div>
+        </div>           
+    </form>  
+    </div>
+  </div>
+</main>

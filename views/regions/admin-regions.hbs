@@ -1,0 +1,44 @@
+<main>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Administrador de Regiones</h1>
+                <p class="lead text-muted">Aquí te mostramos un listado con todas las regiones de nuestros pokemones,
+                    puedes consultar todas las que quieras o incluso crear una propia.</p>
+                <p>
+                    <a href="/create-region" class="btn btn-primary my-2">Crea una nueva región</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{#if hasRegions}}
+
+    <div class="row">
+        {{#each regions}}
+
+        <div class="col mb-4">
+            <div class="card bg-light" style="width: 18rem; height: auto">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <a href="/edit-region/{{this.regionId}}?edit=true" class="btn btn-sm btn-secondary float-end">Actualizar</a>
+                    <form id="form-delete" action="/delete-region" method="post">
+                        <input type="hidden" name="RegionId" value="{{this.regionId}}" />
+                        <button id="btn-delete" type="button" onclick="Confirmation('esta region')" class="btn btn-sm btn-danger float-end me-2">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+    {{else}}
+
+      <h1 class="text-center fw-light mb-3 mt-3">Lo sentimos :(</h1>
+      <h5 class="text-center lead text-muted">No hay regiones registradas todavía.
+
+    {{/if}}
+
+</main>

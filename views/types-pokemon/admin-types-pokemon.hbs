@@ -1,0 +1,45 @@
+<main>
+
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light">Administrador de Tipos de Pokemones</h1>
+                <p class="lead text-muted">Aquí te mostramos un listado con todas los tipos de nuestros pokemones,
+                    puedes consultar todos los que quieras o incluso crear uno propia.</p>
+                <p>
+                    <a href="/create-type" class="btn btn-primary my-2">Crea un nuevo tipo de pokemon</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    {{#if hasTypes}}
+
+    <div class="row">
+        {{#each types}}
+
+        <div class="col mb-4">
+            <div class="card bg-light" style="width: 18rem; height: auto">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    <p class="card-text">{{this.description}}</p>
+                    <a href="/edit-type/{{this.typeId}}?edit=true" class="btn btn-sm btn-secondary float-end">Actualizar</a>
+                    <form id="form-delete" action="/delete-type" method="post">
+                        <input type="hidden" name="TypeId" value="{{this.typeId}}" />
+                        <button id="btn-delete" type="button" onclick="Confirmation('este tipo de pokemon')" class="btn btn-sm btn-danger float-end me-2">Eliminar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        {{/each}}
+    </div>
+    {{else}}
+
+      <h1 class="text-center fw-light mb-3 mt-3">Lo sentimos :(</h1>
+      <h5 class="text-center lead text-muted">No hay tipos de pokemones registrados todavía.
+
+    {{/if}}
+
+</main>
+
